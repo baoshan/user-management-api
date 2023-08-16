@@ -17,15 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        env:
-          PG: ${{ secrets.PG }}
-          JWT_SECRET: JWT_SECRET_123
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm run test:cov
+      - name: Test
+        env:
+          PG: ${{ secrets.PG }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: npm run test:cov
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
