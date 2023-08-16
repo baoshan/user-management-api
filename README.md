@@ -1,5 +1,6 @@
 # RESTful API for User Management
 
+![ci](https://github.com/baoshan/user-management-api/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/baoshan/user-management-api/graph/badge.svg?token=R1YJICQ8KU)](https://codecov.io/gh/baoshan/user-management-api)
 
 This Express.js app sets up 8 API endpoints for user management:
