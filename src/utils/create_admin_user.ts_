@@ -1,0 +1,17 @@
+import { sql } from './postgres.js'
+import { signJWT } from './sign_jwt.js'
+import { type JWT, type User } from '../types.js'
+
+export async function createAdminUser (
+  name: string,
+  email: string,
+  password: string
+): Promise<User & JWT> {
+  const [user] = await sql`
+    INSERT INTO users (name, email, password, admin)
+    VALUES (${name}, ${email}, ${password}, true)
+    RETURNING users.id, users.name, users.email;
+    `
+  const jwt = signJWT(user.id, true)
+  return { ...user, jwt } as User & JWT
+}
