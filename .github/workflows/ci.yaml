@@ -19,7 +19,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         env:
           PG: ${{ secrets.PG }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_SECRET: JWT_SECRET_123
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
