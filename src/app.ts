@@ -19,7 +19,7 @@ import {
 const app = express()
 
 const jwt = expressjwt({
-  secret: process.env.JWT_SECRET ?? '',
+  secret: process.env.JWT_SECRET!,
   algorithms: ['HS256']
 })
 
