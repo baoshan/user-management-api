@@ -256,14 +256,16 @@ All pre-defined errors (code and message) are detailed in the table below.
 
 | # | Code | Message |
 |:--|:--|:--|
-| A | `SYNTAX_ERROR` | Syntax error. |
-| B | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
-| C | `PERMISSION_DENIED` | Permission denied. |
-| D | `USER_ID_MALFORMED` | User ID should be a UUID. |
-| E | `USER_NAME_INVALID` | Name should be non-empty. |
-| F | `USER_EMAIL_INVALID` | A valid email address is required. |
-| G | `USER_PASSWORD_INVALID` | Password should be between 8 and 32 characters. |
-| H | `USER_EMAIL_CONFLICT` | Email is already taken. |
+| **A** | `SYNTAX_ERROR` | Syntax error. |
+| **B** | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
+| **C** | `PERMISSION_DENIED` | Permission denied. |
+| **D** | `USER_ID_MALFORMED` | User ID should be a UUID. |
+| **E** | `USER_NAME_INVALID` | Name should be non-empty. |
+| **F** | `USER_EMAIL_INVALID` | A valid email address is required. |
+| **G** | `USER_PASSWORD_INVALID` | Password should be between 8 and 32 characters. |
+| **H** | `USER_EMAIL_CONFLICT` | Email is already taken. |
+
+Codes are stable but messages are subject to change.
 
 Not all errors apply to all endpoints. For example, the `UNAUTHORIZED_REQUEST`
 error does not apply when creating a new user. This table lists endpoints and
