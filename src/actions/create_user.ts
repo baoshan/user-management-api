@@ -25,11 +25,11 @@ export async function createUser (
     try {
       const newUser = checkResult.right
       const password = await bcrypt.hash(newUser.password, 10)
-      const [user] = await sql`
+      const user = (await sql`
         INSERT INTO users (name, email, password)
         VALUES (${newUser.name}, ${newUser.email}, ${password})
         RETURNING users.id, users.name, users.email, users.admin
-        ` as [UserProfile]
+        `)[0] as UserProfile
       return right({
         id: user.id,
         name: user.name,
