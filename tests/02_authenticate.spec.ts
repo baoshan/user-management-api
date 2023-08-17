@@ -7,7 +7,7 @@ import app from '../src/app.js'
 import { generateRandomNewUser } from './utils.js'
 
 describe('Authenticate', () => {
-  it('succeeds', async () => {
+  it('succeeds (email is case-insensitive)', async () => {
     const newUser = generateRandomNewUser()
 
     await request(app)
@@ -17,7 +17,7 @@ describe('Authenticate', () => {
 
     await request(app)
       .post('/auth')
-      .send({ email: newUser.email, password: newUser.password })
+      .send({ email: newUser.email.toUpperCase(), password: newUser.password })
       .expect(200)
       .then(({ body: user }) => {
         assert.equal(user.name, newUser.name)

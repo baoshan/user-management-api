@@ -5,8 +5,9 @@
   "description": "Create, Retrieve, Update, and Delete Users",
   "main": "src/server.ts",
   "scripts": {
+    "start": "ts-node --esm src/server.ts",
     "lint": "eslint . --ext .ts",
-    "test": "NODE_ENV=test npx mocha --slow 500 --exit",
+    "test": "NODE_ENV=test npx mocha --slow 500 --timeout 2000 --exit",
     "test:cov": "c8 npm test"
   },
   "author": "Baoshan Sheng",

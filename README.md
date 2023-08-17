@@ -37,12 +37,12 @@ JWT_SECRET=my_jet_secret
 
 After `npm install`, use `npm test` to run tests.
 
-### Create A User
+### Create a User
 
-- Successful request
+Create a new user by providing name, email, and password.
 
 ```
-POST http://localhost:3000/users HTTP/1.1
+POST /users HTTP/1.1
 Content-Type: application/json
 
 {
@@ -60,18 +60,143 @@ HTTP/1.1 201 Created
 }
 ```
 
-The API responds with a non-empty array of errors for invalid requests.
+### Authenticate
 
-- Invalid name, email, and password
+Authenticate a user using email and password.
+
 ```
-POST http://localhost:3000/users HTTP/1.1
+POST /auth
 {
-    "name": "",
-    "email": "john",
-    "password": "pwd"
+    "email": "John1@appleased.com",
+    "password": "password"
 }
 
-HTTP/1.1 422 Unprocessable Entity
+HTTP/1.1 200 OK
+{
+  "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
+  "name": "Mike Appleased",
+  "email": "john1@appleased.com",
+  "admin": false,
+  "jwt": "..."
+}
+```
+
+### Get the Authenticated User
+
+The authenticated user is determined using the `JWT` token in the `Authorization` header.
+
+```
+GET /user
+Authorization: Bearer ...
+
+200 OK
+{
+  "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
+  "name": "Mike Appleased",
+  "email": "john1@appleased.com",
+  "admin": false
+}
+```
+
+### Get an Existing User
+
+Authentication as an admin user is required.
+
+```
+GET /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
+Authorization: Bearer ...
+
+200 OK
+{
+  "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
+  "name": "Mike Appleased",
+  "email": "john1@appleased.com",
+  "admin": false
+}
+```
+
+### Update the Authenticated User
+
+Update one or more properties (name, email, and password) of the authenticated user.
+
+The authenticated user is determined using the `JWT` token in the `Authorization` header.
+
+```
+PUT /user
+Authorization: Bearer ...
+
+{"name": "Johnny Appleased"}
+
+HTTP/1.1 204
+```
+
+### Update an Existing User
+
+Authentication as an admin user is required.
+
+```
+PUT /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
+Authorization: Bearer ...
+
+{"name": "Johnny Appleased"}
+
+HTTP/1.1 204
+```
+
+### Delete the Authenticated User
+
+The authenticated user is determined using the `JWT` token in the `Authorization` header.
+
+- Request
+
+```
+DELETE /userba2fab75-5873-4e66-a5d2-b91a5de695f3
+Authorization: Bearer ...
+```
+
+- Response
+
+```
+204 No Content
+```
+
+### Delete an existing user
+
+Authentication as an admin user is required.
+
+- Request
+
+ ```
+DELETE /users/ HTTP/1.1
+Authorization: Bearer ...
+```
+
+- Response
+
+```
+204 No Content
+```
+
+## Error Handling
+
+Errors found during the processing of your request are returned in an array.
+
+- Request
+
+```
+POST /users HTTP/1.1
+
+{
+    "name": "",
+    "email": "",
+    "password": ""
+}
+```
+
+- Response
+
+```
+422 Unprocessable Entity
 [
   {
     "code": "USER_NAME_INVALID",
@@ -88,44 +213,30 @@ HTTP/1.1 422 Unprocessable Entity
 ]
 ```
 
-- Conflict email
-```
-POST http://localhost:3000/users HTTP/1.1
-{
-    "name": "Mike Appleased",
-    "email": "john@appleased.com",
-    "password": "password"
-}
+All pre-defined errors (code and message) are detailed in the table below.
 
-HTTP/1.1 422 Unprocessable Entity
-[
-  {
-    "code": "USER_EMAIL_CONFLICT",
-    "message": "Email is already taken."
-  }
-]
-```
+|   | Code | Message |
+|:--|:--|:--|
+| 1 | `SYNTAX_ERROR` | Syntax error. |
+| 2 | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
+| 3 | `PERMISSION_DENIED` | Permission denied. |
+| 4 | `USER_ID_MALFORMED` | User ID should be a UUID. |
+| 5 | `USER_NAME_INVALID` | Name should be non-empty. |
+| 6 | `USER_EMAIL_INVALID` | A valid email address is required. |
+| 7 | `USER_PASSWORD_INVALID` | Password should be between 8 and 32 characters. |
+| 8 | `USER_EMAIL_CONFLICT` | Email is already taken. |
 
-## Error Handling
+Not all errors apply to all endpoints. For example, the `UNAUTHORIZED_REQUEST`
+error does not apply when creating a new user. This table lists endpoints and
+their applying error numbers.
 
-| # | Name |
-|:--|:--|
-| 1 | `SYNTAX_ERROR` |
-| 2 | `UNAUTHORIZED_REQUEST` |
-| 3 | `PERMISSION_DENIED` |
-| 4 | `USER_ID_MALFORMED` |
-| 5 | `USER_NAME_INVALID` |
-| 6 | `USER_EMAIL_INVALID` |
-| 7 | `USER_PASSWORD_INVALID` |
-| 8 | `USER_EMAIL_CONFLICT` |
-
-| # | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-|:--|:--|:--|:--|:--|:--|:--|:--|:--|
-| Create a new user             | Y | N | N | N | Y | Y | Y | Y |
-| Authenticate                  | Y | Y | N | N | N | N | N | N |
-| Get the authenticated user    | N | Y | N | Y | N | N | N | N |
-| Get an existing user          | N | Y | Y | Y | N | N | N | N |
-| Update the authenticated user | Y | Y | N | Y | Y | Y | Y | Y |
+| Endpoint | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|:---------|:--|:--|:--|:--|:--|:--|:--|:--|
+| Create a new user             | Y | - | - | - | Y | Y | Y | Y |
+| Authenticate                  | Y | Y | - | - | - | - | - | - |
+| Get the authenticated user    | - | Y | - | Y | - | - | - | - |
+| Get an existing user          | - | Y | Y | Y | - | - | - | - |
+| Update the authenticated user | Y | Y | - | Y | Y | Y | Y | Y |
 | Update an existing user       | Y | Y | Y | Y | Y | Y | Y | Y |
-| Delete the authenticated user | N | Y | N | Y | N | N | N | N |
-| Delete an existing user       | N | Y | Y | Y | N | N | N | N |
+| Delete the authenticated user | - | Y | - | Y | - | - | - | - |
+| Delete an existing user       | - | Y | Y | Y | - | - | - | - |

@@ -12,7 +12,7 @@ export async function auth (
   const user = (await sql`
   SELECT id, name, email, password, admin
     FROM users
-   WHERE email = ${email}
+   WHERE LOWER(email) = LOWER(${email})
    `)[0] as UserRow | undefined
   if ((user == null) || !await bcrypt.compare(password, user.password)) return
   return {

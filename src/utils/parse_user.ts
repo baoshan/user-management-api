@@ -16,7 +16,10 @@ export function parsePartialUser (
   }
 
   if ('email' in user) {
-    if (typeof user.email === 'string' && emailPattern.test(user.email)) {
+    if (
+      typeof user.email === 'string' &&
+      emailPattern.test(user.email)
+    ) {
       result.email = user.email
     } else {
       errors.push({ code: 'USER_EMAIL_INVALID', message: emailInvalid })

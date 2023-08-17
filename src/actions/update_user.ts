@@ -4,7 +4,7 @@ import { type Either, isLeft, left, right } from 'fp-ts/lib/Either.js'
 
 /* --- local dependencies --- */
 import { sql } from '../utils/postgres.js'
-import { parsePartialUser, idPattern } from '../utils/parse_user.js'
+import { idPattern, parsePartialUser } from '../utils/parse_user.js'
 import { invalidIdError } from '../utils/non_validation_errors.js'
 import { checkConflictEmail } from '../utils/check_conflict_email.js'
 import type { Error } from '../types.js'
