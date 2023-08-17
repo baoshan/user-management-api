@@ -42,10 +42,20 @@ describe('Get the authenticated user', () => {
       }])
   })
 
-  it('rejects malformed user id', async () => {
+  it('rejects malformed user ids (1)', async () => {
     await request(app)
       .get('/user')
       .set('Authorization', `Bearer ${signJWT('', false)}`)
+      .expect(422, [{
+        code: 'USER_ID_MALFORMED',
+        message: 'User ID should be a UUID.'
+      }])
+  })
+
+  it('rejects malformed user ids (2)', async () => {
+    await request(app)
+      .get('/user')
+      .set('Authorization', `Bearer ${signJWT('malformed-user-id', false)}`)
       .expect(422, [{
         code: 'USER_ID_MALFORMED',
         message: 'User ID should be a UUID.'

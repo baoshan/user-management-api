@@ -1,6 +1,7 @@
 import { type Either, left, right } from 'fp-ts/lib/Either.js'
 import type { Error, NewUser } from '../types.js'
 
+/** Parse user properties to update from client provided data. */
 export function parsePartialUser (
   user: object
 ): Either<Error[], Partial<NewUser>> {
@@ -40,7 +41,7 @@ export function parsePartialUser (
   return (errors.length > 0) ? left(errors) : right(user)
 }
 
-/** Parse `NewUser` from client provided user data (Parse, don’t validate). */
+/** Parse a new user to be registered from client provided data. */
 export function parseNewUser (
   user: object
 ): Either<Error[], NewUser> {

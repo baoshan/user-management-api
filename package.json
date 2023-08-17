@@ -7,6 +7,7 @@
   "scripts": {
     "start": "ts-node --esm src/server.ts",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "test": "NODE_ENV=test npx mocha --slow 500 --timeout 2000 --exit",
     "test:cov": "c8 npm test"
   },

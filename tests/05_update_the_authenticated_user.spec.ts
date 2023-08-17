@@ -107,7 +107,7 @@ describe('Update the authenticated user', () => {
   it('rejects malormed user ids', async () => {
     await request(app)
       .put('/user')
-      .set('Authorization', `Bearer ${signJWT('foo', false)}`)
+      .set('Authorization', `Bearer ${signJWT('malformed-user-id', false)}`)
       .expect(422, [{
         code: 'USER_ID_MALFORMED',
         message: 'User ID should be a UUID.'

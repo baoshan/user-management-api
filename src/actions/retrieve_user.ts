@@ -1,9 +1,18 @@
-import { sql } from '../utils/postgres.js'
-import type { UserProfile, Error } from '../types.js'
+/* --- remote dependencies --- */
 import { type Either, left, right } from 'fp-ts/lib/Either.js'
-import { idPattern } from '../utils/parse_user.js'
-import { invalidIdError } from '../utils/non_validation_errors.js'
 
+/* --- local dependencies --- */
+import { sql } from '../utils/postgres.js'
+import { idPattern } from '../utils/parse_user.js'
+import { invalidIdError } from '../utils/non_parsing_errors.js'
+import type { Error, UserProfile } from '../types.js'
+
+/**
+ * Retrieve an user of specified id.
+ * @param id Id of the user.
+ * @returns Either an array of non-empty errors or an user (or undefined when
+ * user of the id does not exist).
+ */
 export async function retrieveUser (
   id: unknown
 ): Promise<
@@ -13,10 +22,11 @@ export async function retrieveUser (
     return left([invalidIdError])
   }
 
-  const [user] = await sql`
+  const user = (await sql`
   SELECT id, name, email, admin
     FROM users
    WHERE id = ${id}
-  `
-  return right(user as UserProfile | undefined)
+  `)[0] as UserProfile | undefined
+
+  return right(user)
 }

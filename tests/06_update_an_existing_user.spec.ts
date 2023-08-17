@@ -114,7 +114,7 @@ describe('Update an existing user', () => {
 
   it('rejects malformed user ids', async () => {
     await request(app)
-      .put('/users/foo')
+      .put('/users/malformed-user-id')
       .set('Authorization', `Bearer ${adminJWT}`)
       .send({})
       .expect(422, [{
@@ -175,23 +175,3 @@ describe('Update an existing user', () => {
       }])
   })
 })
-
-// const originalUser = generateRandomNewUser();
-// const { body: user } = await request(app)
-//   .post("/users")
-//   .set("Content-Type", "application/json")
-//   .send(originalUser)
-//   .expect("Content-Type", /json/)
-//   .expect(201);
-
-// await request(app)
-//   .get(`/users/${user.id}`)
-//   .set("Authorization", `Bearer ${adminJWT}`)
-//   .expect(200, {
-//     id: user.id,
-//     name: modifiedUser.name,
-//     email: modifiedUser.email,
-//   });
-
-// assert.equal(modifiedUser.name, newName);
-// assert.equal(modifiedUser.email, newEmail);

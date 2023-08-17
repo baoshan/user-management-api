@@ -76,6 +76,7 @@ describe('Delete an existing user', () => {
       }])
   })
 
+  // this is a hack to cover the last line of code otherwise not covered.
   it('response 500 for internals errors', async () => {
     await sql.end()
 

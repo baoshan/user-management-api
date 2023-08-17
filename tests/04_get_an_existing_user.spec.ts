@@ -60,7 +60,7 @@ describe('Get an existing user', () => {
     const adminJWT = signJWT(generateRandomUUID(), true)
 
     await request(app)
-      .get('/users/foo')
+      .get('/users/malformed-user-id')
       .set('Authorization', `Bearer ${adminJWT}`)
       .expect(422, [{
         code: 'USER_ID_MALFORMED',

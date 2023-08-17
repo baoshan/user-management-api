@@ -1,8 +1,11 @@
+/* --- remote dependencies --- */
 import { type Either, isLeft, left, right } from 'fp-ts/lib/Either.js'
+
+/* --- local dependencies --- */
 import { sql } from '../utils/postgres.js'
 import { parseNewUser } from '../utils/parse_user.js'
 import { checkConflictEmail } from '../utils/check_conflict_email.js'
-import type { AuthenticatedUser, Error } from '../types.js'
+import type { AuthenticatedUser, Error, UserProfile } from '../types.js'
 import { signJWT } from '../utils/sign_jwt.js'
 import bcrypt from 'bcrypt'
 
@@ -25,8 +28,8 @@ export async function createUser (
       const [user] = await sql`
         INSERT INTO users (name, email, password)
         VALUES (${newUser.name}, ${newUser.email}, ${password})
-        RETURNING users.*;
-        `
+        RETURNING users.id, users.name, users.email, users.admin
+        ` as [UserProfile]
       return right({
         id: user.id,
         name: user.name,
