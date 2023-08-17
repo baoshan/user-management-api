@@ -19,7 +19,7 @@ This Express.js app sets up 8 API endpoints for user management.
 | 7 | `DELETE` | `/user` | Delete the authenticated user | Yes | No |
 | 8 | `DELETE` | `/users/:id` | Delete an existing user | Yes | Yes |
 
-## Environment Prepare
+## Preparement
 
 Database scheme is defined in the [`scheme.sql`](scheme.sql). Below command
 **drops** & recreates the table named `users`.
@@ -36,9 +36,12 @@ PG=postgresql://username:password@server:port/database
 JWT_SECRET=my_jwt_secret
 ```
 
-## Run Tests
+## Test & Start
 
-After `npm install`, use `npm test` to run tests.
+After `npm install`:
+
+- Use `npm test` to run tests.
+- Use `npm start` to start service.
 
 ## Create a User
 
@@ -188,7 +191,6 @@ Errors found during the processing of your request are returned in an array.
 
 ```
 POST /users HTTP/1.1
-
 {
     "name": "",
     "email": "",
