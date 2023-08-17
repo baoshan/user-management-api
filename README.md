@@ -236,11 +236,11 @@ their applying error numbers. Open circles are program errors that you should
 
 | Endpoint | A | B | C | D | E | F | G | H |
 |:---------|:--|:--|:--|:--|:--|:--|:--|:--|
-| Create a new user             | ○ | - | - | - | ⏺ | ⏺ | ⏺ | ⏺ |
-| Authenticate                  | ○ | ⏺ | - | - | - | - | - | - |
-| Get the authenticated user    | - | ⏺ | - | ○ | - | - | - | - |
-| Get an existing user          | - | ⏺ | ⏺ | ○ | - | - | - | - |
-| Update the authenticated user | ○ | ⏺ | - | ○ | ⏺ | ⏺ | ⏺ | ⏺ |
-| Update an existing user       | ○ | ⏺ | ⏺ | ○ | ⏺ | ⏺ | ⏺ | ⏺ |
-| Delete the authenticated user | - | ⏺ | - | ○ | - | - | - | - |
-| Delete an existing user       | - | ⏺ | ⏺ | ○ | - | - | - | - |
+| Create a new user             | ○ | - | - | - | ● | ● | ● | ● |
+| Authenticate                  | ○ | ● | - | - | - | - | - | - |
+| Get the authenticated user    | - | ● | - | ○ | - | - | - | - |
+| Get an existing user          | - | ● | ● | ○ | - | - | - | - |
+| Update the authenticated user | ○ | ● | - | ○ | ● | ● | ● | ● |
+| Update an existing user       | ○ | ● | ● | ○ | ● | ● | ● | ● |
+| Delete the authenticated user | - | ● | - | ○ | - | - | - | - |
+| Delete an existing user       | - | ● | ● | ○ | - | - | - | - |
