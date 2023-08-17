@@ -219,7 +219,7 @@ POST /users HTTP/1.1
 
 All pre-defined errors (code and message) are detailed in the table below.
 
-|   | Code | Message |
+| # | Code | Message |
 |:--|:--|:--|
 | A | `SYNTAX_ERROR` | Syntax error. |
 | B | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
