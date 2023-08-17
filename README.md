@@ -239,8 +239,8 @@ their applying error numbers. Open circles are program errors that you should
 | Create a new user             | ○ | - | - | - | ● | ● | ● | ● |
 | Authenticate                  | ○ | ● | - | - | - | - | - | - |
 | Get the authenticated user    | - | ● | - | ○ | - | - | - | - |
-| Get an existing user          | - | ● | ● | ○ | - | - | - | - |
+| Get an existing user          | - | ● | ○ | ○ | - | - | - | - |
 | Update the authenticated user | ○ | ● | - | ○ | ● | ● | ● | ● |
-| Update an existing user       | ○ | ● | ● | ○ | ● | ● | ● | ● |
+| Update an existing user       | ○ | ● | ○ | ○ | ● | ● | ● | ● |
 | Delete the authenticated user | - | ● | - | ○ | - | - | - | - |
-| Delete an existing user       | - | ● | ● | ○ | - | - | - | - |
+| Delete an existing user       | - | ● | ○ | ○ | - | - | - | - |
