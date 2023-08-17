@@ -3,10 +3,10 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-    id       UUID DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY,
-    name     TEXT NOT NULL,
-    email    TEXT NOT NULL,
-    password TEXT NOT NULL,
+    id       UUID    NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+    name     TEXT    NOT NULL,
+    email    TEXT    NOT NULL,
+    password TEXT    NOT NULL,
     admin    BOOLEAN NOT NULL DEFAULT FALSE
 );
 
