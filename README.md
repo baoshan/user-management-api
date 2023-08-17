@@ -237,11 +237,11 @@ their applying error numbers.
 
 | Endpoint | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
 |:---------|:--|:--|:--|:--|:--|:--|:--|:--|
-| Create a new user             | Y | - | - | - | Y | Y | Y | Y |
-| Authenticate                  | Y | Y | - | - | - | - | - | - |
-| Get the authenticated user    | - | Y | - | Y | - | - | - | - |
-| Get an existing user          | - | Y | Y | Y | - | - | - | - |
-| Update the authenticated user | Y | Y | - | Y | Y | Y | Y | Y |
-| Update an existing user       | Y | Y | Y | Y | Y | Y | Y | Y |
-| Delete the authenticated user | - | Y | - | Y | - | - | - | - |
-| Delete an existing user       | - | Y | Y | Y | - | - | - | - |
+| Create a new user             | ⏺ | - | - | - | ⏺ | ⏺ | ⏺ | ⏺ |
+| Authenticate                  | ⏺ | ⏺ | - | - | - | - | - | - |
+| Get the authenticated user    | - | ⏺ | - | ⏺ | - | - | - | - |
+| Get an existing user          | - | ⏺ | ⏺ | ⏺ | - | - | - | - |
+| Update the authenticated user | ⏺ | ⏺ | - | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ |
+| Update an existing user       | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ |
+| Delete the authenticated user | - | ⏺ | - | ⏺ | - | - | - | - |
+| Delete an existing user       | - | ⏺ | ⏺ | ⏺ | - | - | - | - |
