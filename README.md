@@ -6,7 +6,7 @@
 This Express.js app sets up 8 API endpoints for user management.
 
 - Some endpoints require authentication.
-- Some endpoints also require authentication as an administrator.
+- Some endpoints require authentication as an administrator.
 
 | # | Method | Route | Purpose | Auth? | Admin? |
 |:--|:--|:--|:--|:--|:--|
@@ -132,6 +132,8 @@ HTTP/1.1 204
 ```
 
 ### Update an Existing User
+
+Update one or more properties (name, email, and password) of the authenticated user.
 
 Authentication as an administrator is required.
 
