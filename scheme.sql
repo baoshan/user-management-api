@@ -1,4 +1,4 @@
--- !!! DANGER !!! This script DROP & RECREATE the `users` table. !!! 
+-- !!! DANGER !!! This script DROPS & RECREATES the `users` table. !!! 
 
 DROP TABLE IF EXISTS users;
 
