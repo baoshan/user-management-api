@@ -58,6 +58,7 @@ HTTP/1.1 201 Created
   "id": "326b8b5e-e4ac-464a-ab61-38246148e9b0",
   "name": "John Appleseed",
   "email": "john@appleased.com",
+  "admin": false,
   "jwt": "..."
 }
 ```
