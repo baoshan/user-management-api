@@ -45,6 +45,8 @@ After `npm install`:
 
 Create a new user by providing name, email, and password.
 
+- Request
+
 ```
 POST /users HTTP/1.1
 {
@@ -52,7 +54,11 @@ POST /users HTTP/1.1
     "email": "john@appleased.com",
     "password": "password"
 }
+```
 
+- Response
+
+```
 HTTP/1.1 201 Created
 {
   "id": "326b8b5e-e4ac-464a-ab61-38246148e9b0",
@@ -67,13 +73,19 @@ HTTP/1.1 201 Created
 
 Authenticate a user using email and password.
 
+- Request
+
 ```
 POST /auth
 {
     "email": "john@appleased.com",
     "password": "password"
 }
+```
 
+- Response
+
+```
 HTTP/1.1 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
@@ -88,10 +100,15 @@ HTTP/1.1 200 OK
 
 The authenticated user is determined using the `JWT` token in the `Authorization` header.
 
+- Request
 ```
 GET /user
 Authorization: Bearer ...
+```
 
+- Response
+
+```
 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
@@ -105,10 +122,16 @@ Authorization: Bearer ...
 
 Authentication as an administrator is required.
 
+- Request
+
 ```
 GET /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
 Authorization: Bearer ...
+```
 
+- Response
+
+```
 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
@@ -124,12 +147,18 @@ Update one or more properties (name, email, and password) of the authenticated u
 
 The authenticated user is determined using the `JWT` token in the `Authorization` header.
 
+- Request
+
 ```
 PUT /user
 Authorization: Bearer ...
 
 {"name": "Johnny Appleseed"}
+```
 
+- Response
+
+```
 HTTP/1.1 204
 ```
 
@@ -139,12 +168,18 @@ Update one or more properties (name, email, and password) of the authenticated u
 
 Authentication as an administrator is required.
 
+- Request
+
 ```
 PUT /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
 Authorization: Bearer ...
 
 {"name": "Johnny Appleseed"}
+```
 
+- Response
+
+```
 HTTP/1.1 204
 ```
 
