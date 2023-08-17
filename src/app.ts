@@ -86,16 +86,12 @@ app.put('/users/:id', json, jwt, async function (req: JWTRequest, res) {
 // Delete the authenticated user
 app.delete('/user', jwt, async (req: JWTRequest, res) => {
   const id = req.auth?.sub
-  // if (!id) {
-  //   res.status(401).json([unauthorizedRequestError]);
-  // } else {
   const result = await deleteUser(id)
   if (isLeft(result)) {
     res.status(422).json(result.left)
   } else {
     res.status(204).end()
   }
-  // }
 })
 
 // Delete an existing user
