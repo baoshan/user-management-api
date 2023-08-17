@@ -5,8 +5,8 @@
 
 This Express.js app sets up 8 API endpoints for user management.
 
-- Some endpoints require authentication.
-- Some endpoints require authentication as an administrator.
+- Some endpoints require (JWT) authentication.
+- Some endpoints require (JWT) authentication as an administrator.
 
 | # | Method | Route | Purpose | Auth? | Admin? |
 |:--|:--|:--|:--|:--|:--|
@@ -19,7 +19,7 @@ This Express.js app sets up 8 API endpoints for user management.
 | 7 | `DELETE` | `/user` | Delete the authenticated user | Yes | No |
 | 8 | `DELETE` | `/users/:id` | Delete an existing user | Yes | Yes |
 
-## Preparement
+## Prepare, Test, and Start
 
 Database scheme is defined in the [`scheme.sql`](scheme.sql). Below command
 **drops** & recreates the table named `users`.
@@ -36,12 +36,10 @@ PG=postgresql://username:password@server:port/database
 JWT_SECRET=my_jwt_secret
 ```
 
-## Test & Start
-
 After `npm install`:
 
-- Use `npm test` to run tests.
-- Use `npm start` to start service.
+- Run `npm test` to run tests.
+- Run `npm start` to start service.
 
 ## Create a User
 
@@ -222,26 +220,27 @@ All pre-defined errors (code and message) are detailed in the table below.
 
 |   | Code | Message |
 |:--|:--|:--|
-| 1 | `SYNTAX_ERROR` | Syntax error. |
-| 2 | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
-| 3 | `PERMISSION_DENIED` | Permission denied. |
-| 4 | `USER_ID_MALFORMED` | User ID should be a UUID. |
-| 5 | `USER_NAME_INVALID` | Name should be non-empty. |
-| 6 | `USER_EMAIL_INVALID` | A valid email address is required. |
-| 7 | `USER_PASSWORD_INVALID` | Password should be between 8 and 32 characters. |
-| 8 | `USER_EMAIL_CONFLICT` | Email is already taken. |
+| A | `SYNTAX_ERROR` | Syntax error. |
+| B | `UNAUTHORIZED_REQUEST` | Unauthorized request. |
+| C | `PERMISSION_DENIED` | Permission denied. |
+| D | `USER_ID_MALFORMED` | User ID should be a UUID. |
+| E | `USER_NAME_INVALID` | Name should be non-empty. |
+| F | `USER_EMAIL_INVALID` | A valid email address is required. |
+| G | `USER_PASSWORD_INVALID` | Password should be between 8 and 32 characters. |
+| H | `USER_EMAIL_CONFLICT` | Email is already taken. |
 
 Not all errors apply to all endpoints. For example, the `UNAUTHORIZED_REQUEST`
 error does not apply when creating a new user. This table lists endpoints and
-their applying error numbers.
+their applying error numbers. Open circles are program errors that you should
+(and can) avoid.
 
-| Endpoint | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| Endpoint | A | B | C | D | E | F | G | H |
 |:---------|:--|:--|:--|:--|:--|:--|:--|:--|
-| Create a new user             | ⏺ | - | - | - | ⏺ | ⏺ | ⏺ | ⏺ |
-| Authenticate                  | ⏺ | ⏺ | - | - | - | - | - | - |
-| Get the authenticated user    | - | ⏺ | - | ⏺ | - | - | - | - |
-| Get an existing user          | - | ⏺ | ⏺ | ⏺ | - | - | - | - |
-| Update the authenticated user | ⏺ | ⏺ | - | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ |
-| Update an existing user       | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ | ⏺ |
-| Delete the authenticated user | - | ⏺ | - | ⏺ | - | - | - | - |
-| Delete an existing user       | - | ⏺ | ⏺ | ⏺ | - | - | - | - |
+| Create a new user             | ○ | - | - | - | ⏺ | ⏺ | ⏺ | ⏺ |
+| Authenticate                  | ○ | ⏺ | - | - | - | - | - | - |
+| Get the authenticated user    | - | ⏺ | - | ○ | - | - | - | - |
+| Get an existing user          | - | ⏺ | ⏺ | ○ | - | - | - | - |
+| Update the authenticated user | ○ | ⏺ | - | ○ | ⏺ | ⏺ | ⏺ | ⏺ |
+| Update an existing user       | ○ | ⏺ | ⏺ | ○ | ⏺ | ⏺ | ⏺ | ⏺ |
+| Delete the authenticated user | - | ⏺ | - | ○ | - | - | - | - |
+| Delete an existing user       | - | ⏺ | ⏺ | ○ | - | - | - | - |
