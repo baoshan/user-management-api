@@ -3,7 +3,10 @@
 ![ci](https://github.com/baoshan/user-management-api/actions/workflows/ci.yaml/badge.svg)
 [![codecov](https://codecov.io/gh/baoshan/user-management-api/graph/badge.svg?token=R1YJICQ8KU)](https://codecov.io/gh/baoshan/user-management-api)
 
-This Express.js app sets up 8 API endpoints for user management:
+This Express.js app sets up 8 API endpoints for user management.
+
+- Some endpoints require authentication.
+- Some endpoints also require authentication as an administrator.
 
 | # | Method | Route | Purpose | Auth? | Admin? |
 |:--|:--|:--|:--|:--|:--|
@@ -30,23 +33,21 @@ JWT secret:
 
 ```
 PG=postgresql://username:password@server:port/database
-JWT_SECRET=my_jet_secret
+JWT_SECRET=my_jwt_secret
 ```
 
 ## Run Tests
 
 After `npm install`, use `npm test` to run tests.
 
-### Create a User
+## Create a User
 
 Create a new user by providing name, email, and password.
 
 ```
 POST /users HTTP/1.1
-Content-Type: application/json
-
 {
-    "name": "John Appleased",
+    "name": "John Appleseed",
     "email": "john@appleased.com",
     "password": "password"
 }
@@ -54,7 +55,7 @@ Content-Type: application/json
 HTTP/1.1 201 Created
 {
   "id": "326b8b5e-e4ac-464a-ab61-38246148e9b0",
-  "name": "John Appleased",
+  "name": "John Appleseed",
   "email": "john@appleased.com",
   "jwt": "..."
 }
@@ -67,15 +68,15 @@ Authenticate a user using email and password.
 ```
 POST /auth
 {
-    "email": "John1@appleased.com",
+    "email": "john@appleased.com",
     "password": "password"
 }
 
 HTTP/1.1 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
-  "name": "Mike Appleased",
-  "email": "john1@appleased.com",
+  "name": "John Appleseed",
+  "email": "john@appleased.com",
   "admin": false,
   "jwt": "..."
 }
@@ -92,15 +93,15 @@ Authorization: Bearer ...
 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
-  "name": "Mike Appleased",
-  "email": "john1@appleased.com",
+  "name": "John Appleseed",
+  "email": "john@appleased.com",
   "admin": false
 }
 ```
 
 ### Get an Existing User
 
-Authentication as an admin user is required.
+Authentication as an administrator is required.
 
 ```
 GET /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
@@ -109,8 +110,8 @@ Authorization: Bearer ...
 200 OK
 {
   "id": "ba2fab75-5873-4e66-a5d2-b91a5de695f3",
-  "name": "Mike Appleased",
-  "email": "john1@appleased.com",
+  "name": "John Appleseed",
+  "email": "john@appleased.com",
   "admin": false
 }
 ```
@@ -125,20 +126,20 @@ The authenticated user is determined using the `JWT` token in the `Authorization
 PUT /user
 Authorization: Bearer ...
 
-{"name": "Johnny Appleased"}
+{"name": "Johnny Appleseed"}
 
 HTTP/1.1 204
 ```
 
 ### Update an Existing User
 
-Authentication as an admin user is required.
+Authentication as an administrator is required.
 
 ```
 PUT /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3
 Authorization: Bearer ...
 
-{"name": "Johnny Appleased"}
+{"name": "Johnny Appleseed"}
 
 HTTP/1.1 204
 ```
@@ -150,7 +151,7 @@ The authenticated user is determined using the `JWT` token in the `Authorization
 - Request
 
 ```
-DELETE /userba2fab75-5873-4e66-a5d2-b91a5de695f3
+DELETE /user
 Authorization: Bearer ...
 ```
 
@@ -162,12 +163,12 @@ Authorization: Bearer ...
 
 ### Delete an existing user
 
-Authentication as an admin user is required.
+Authentication as an administrator is required.
 
 - Request
 
  ```
-DELETE /users/ HTTP/1.1
+DELETE /users/ba2fab75-5873-4e66-a5d2-b91a5de695f3 HTTP/1.1
 Authorization: Bearer ...
 ```
 
